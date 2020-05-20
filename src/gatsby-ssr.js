@@ -15,6 +15,7 @@ exports.onRenderBody = (
   }
 
   const anonymize = pluginOptions.anonymize || false;
+  const optimizeId = pluginOptions.optimizeId || false;
 
   const gtagScript = (
     <script
@@ -27,6 +28,9 @@ exports.onRenderBody = (
   const scriptStr = `
     window.GATSBY_GTAG_PLUGIN_GA_TRACKING_ID = (
       '${pluginOptions.trackingId}'
+    );
+    window.GATSBY_GTAG_PLUGIN_GA_OPTIMIZE_ID = (
+      '${pluginOptions.optimizeId}'
     );
     window.GATSBY_GTAG_PLUGIN_ANONYMIZE = ${anonymize};
 
@@ -42,6 +46,10 @@ exports.onRenderBody = (
     window.gtag = gtag;
     gtag('js', new Date());
     gtag('config', '${pluginOptions.trackingId}', options);
+
+    if(${optimizeId}) {
+      gtag('config', '', { 'optimize_id': ${optimizeId}});
+    }
   `;
   const trackScript = (
     <script

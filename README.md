@@ -52,6 +52,10 @@ Puts tracking script in the head instead of the body. Default is false (render i
 Adds `anonymize_ip` flag when calling `gtag`. More info
 [here](https://developers.google.com/analytics/devguides/collection/gtagjs/ip-anonymization).
 
+#### optmizedId
+
+If you need to use Google Optimize for A/B testing, you can add this optional Optimize container id to allow Google Optimize to load the correct test parameters for your site.
+
 ## Testing in development mode
 
 By default `gatsby-plugin-gtag` will only load and run google analytics when `process.env.NODE_ENV === 'production'`.

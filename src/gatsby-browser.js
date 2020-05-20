@@ -1,5 +1,6 @@
 exports.onRouteUpdate = ({ location }) => {
   const trackingId = window.GATSBY_GTAG_PLUGIN_GA_TRACKING_ID;
+  const optimizeId = window.GATSBY_GTAG_PLUGIN_GA_OPTIMIZE_ID;
   const anonymize = window.GATSBY_GTAG_PLUGIN_ANONYMIZE || false;
 
   if (!trackingId || typeof window.gtag !== `function`) {
@@ -9,9 +10,7 @@ exports.onRouteUpdate = ({ location }) => {
   let locationStr = '';
 
   if (location) {
-    locationStr = `${location.pathname}${location.search}${
-      location.hash
-    }`;
+    locationStr = `${location.pathname}${location.search}${location.hash}`;
   }
 
   let anonymizeObj = {};
@@ -23,4 +22,8 @@ exports.onRouteUpdate = ({ location }) => {
     page_path: locationStr,
     ...anonymizeObj,
   });
+
+  if (optimizeId) {
+    window.gtag('config', '', { optimize_id: optimizeId });
+  }
 };
