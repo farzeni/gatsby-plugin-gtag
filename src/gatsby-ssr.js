@@ -35,7 +35,8 @@ exports.onRenderBody = (
     window.GATSBY_GTAG_PLUGIN_ANONYMIZE = ${anonymize};
 
     var options = {
-      send_page_view: false
+      send_page_view: false,
+      optimizeId: '${optimizeId}'
     };
     if (${anonymize}) {
       options.anonymize_ip = true;
@@ -46,10 +47,6 @@ exports.onRenderBody = (
     window.gtag = gtag;
     gtag('js', new Date());
     gtag('config', '${pluginOptions.trackingId}', options);
-
-    if(${optimizeId}) {
-      gtag('config', '', { 'optimize_id': ${optimizeId}});
-    }
   `;
   const trackScript = (
     <script
